@@ -12,7 +12,7 @@ class TvMazeAPI {
         $showCollection = collect($showData);
 
         return $showCollection->map(function ($show) {
-            return new Episode($show['name'], $show['image'], $show['season'], $show['number'], $show['summary']);
+            return new Episode($show['name'], $show['image']['original'], $show['season'], $show['number'], $show['summary']);
         });
     }
 

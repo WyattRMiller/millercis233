@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Models\Episode;
 use App\Models\TvMazeAPI;
 
 /*
@@ -26,4 +25,3 @@ Route::get('/episodes', function () {
 Route::get('/', function () {
     return view('welcome');
 });
-

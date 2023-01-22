@@ -4,6 +4,12 @@ namespace App\Models;
 
 class Episode {
 
+    public $name;
+    public $image;
+    public $season;
+    public $episode;
+    public $summary;
+
     public function __construct($name, $image, $season, $episode, $summary)
     {
         $this->name = $name;
@@ -12,5 +18,5 @@ class Episode {
         $this->episode = $episode;
         $this->summary = $summary;
     }
-}
 
+}
