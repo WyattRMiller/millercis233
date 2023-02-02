@@ -14,7 +14,15 @@ use App\Models\TvMazeAPI;
 |
 */
 
-Route::get('/episodes', function () {
+Route::get('/load-episodes', function () {
+    $showNumber = intval(request()->query('showNumber'));
+    $showNumber = $showNumber < 1 ? 1 : $showNumber;
+
+    $episodes = TvMazeAPI::fetch($showNumber);
+    return view('episodes', ['episodes' => $episodes]);
+});
+
+Route::get('/view-episodes', function () {
     $showNumber = intval(request()->query('showNumber'));
     $showNumber = $showNumber < 1 ? 1 : $showNumber;
 
