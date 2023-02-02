@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Models\TvMazeAPI;
+use App\Models\Episode;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,7 +27,7 @@ Route::get('/view-episodes', function () {
     $showNumber = intval(request()->query('showNumber'));
     $showNumber = $showNumber < 1 ? 1 : $showNumber;
 
-    $episodes = TvMazeAPI::fetch($showNumber);
+    $episodes = Episode::where('show_number', $showNumber)->get();
     return view('episodes', ['episodes' => $episodes]);
 });
 

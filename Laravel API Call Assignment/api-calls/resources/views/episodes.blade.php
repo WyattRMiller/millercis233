@@ -11,8 +11,12 @@
 </head>
 
 <body>
+@if(count($episodes) == 0)
+<h1>There are no episodes to show.</h1>
+@else
     <div class="card-group">
         <div class="row row-cols-1 row-cols-md-3 g-0">
+
             @foreach ($episodes as $episode)
 
             <div class="col">
@@ -33,8 +37,11 @@
             </div>
 
             @endforeach
+
+            
         </div>
     </div>
+    @endif
 </body>
 
 </html>
