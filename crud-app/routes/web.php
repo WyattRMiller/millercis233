@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Models\Product;
+use App\Http\Controllers\ProductController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,7 +19,4 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/products', function () {
-    $products = App\Models\Product::all();
-    return view('products', ['products' => $products]);
-});
+Route::resource('products', ProductController::class);
