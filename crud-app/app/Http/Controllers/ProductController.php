@@ -13,7 +13,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = \App\Models\Product::all();
+        $products = \App\Models\Product::paginate(10);
         return view('products.index', ['products' => $products]);
     }
 
@@ -46,7 +46,8 @@ class ProductController extends Controller
      */
     public function show($id)
     {
-        //
+        $product = \App\Models\Product::find($id);
+        return view('products.show', ['product' => $product]);
     }
 
     /**
