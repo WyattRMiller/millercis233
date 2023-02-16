@@ -2,6 +2,7 @@
 
 @section('content')
 
+<button type="button" class="btn btn-primary">Add Record</button>
 
 <table class="table">
 
@@ -10,6 +11,8 @@
     <th>Name</th>
     <th>Price</th>
     <th>Item Number</th>
+    <th>Edit</th>
+    <th>Delete</th>
   </tr>
   @foreach ($products as $product)
   <tr>
@@ -17,6 +20,8 @@
     <td><a href="{{route('products.show', $product->id)}}">{{$product->name}}</a></td>
     <td>${{$product->price}}</td>
     <td>{{$product->item_number}}</td>
+    <td><button type="button" class="btn btn-primary">Edit</button></td>
+    <td><button type="button" class="btn btn-danger">Delete</button></td>
   </tr>
   @endforeach
 </table>
