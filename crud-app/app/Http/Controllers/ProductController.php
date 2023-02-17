@@ -25,7 +25,8 @@ class ProductController extends Controller
      */
     public function create()
     {
-        //
+        $products = Product::paginate(10);
+        return view('products.create', ['products' => $products]);
     }
 
     /**
@@ -36,7 +37,17 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'name' => 'required',
+            'price' => 'required|decimal:2',
+            'description' => 'required',
+            'item_number' => 'required|integer',
+            'image' => 'required',
+        ]);
+
+        Product::create($validatedData);
+
+        return redirect()->route('products.index')->with('success', 'Product was added successfully');
     }
 
     /**
