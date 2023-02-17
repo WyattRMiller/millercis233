@@ -37,15 +37,7 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        $validatedData = $request->validate([
-            'name' => 'required',
-            'price' => 'required|decimal:2',
-            'description' => 'required',
-            'item_number' => 'required|integer',
-            'image' => 'required',
-        ]);
-
-        Product::create($validatedData);
+        Product::create($this->validatedData($request));
 
         return redirect()->route('products.index')->with('success', 'Product was added successfully');
     }
@@ -58,7 +50,7 @@ class ProductController extends Controller
      */
     public function show($id)
     {
-        $product = Product::find($id);
+        $product = Product::findOrFail($id);
         return view('products.show', ['product' => $product]);
     }
 
@@ -70,7 +62,7 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
-        $product = Product::find($id);
+        $product = Product::findOrFail($id);
         return view('products.edit', ['product' => $product]);
     }
 
@@ -83,15 +75,7 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $validatedData = $request->validate([
-            'name' => 'required',
-            'price' => 'required|decimal:2',
-            'description' => 'required',
-            'item_number' => 'required|integer',
-            'image' => 'required',
-        ]);
-
-        Product::find($id)->update($validatedData);
+        Product::find($id)->update($this->validatedData($request));
 
         return redirect()->route('products.index')->with('success', 'Product was updated successfully');
     }
@@ -108,5 +92,15 @@ class ProductController extends Controller
         $product->delete();
 
         return redirect()->route('products.index')->with('success', 'Product was deleted successfully');
+    }
+
+    private function validatedData($request) {
+        return $request->validate([
+            'name' => 'required',
+            'price' => 'required|decimal:2',
+            'description' => 'required',
+            'item_number' => 'required|integer',
+            'image' => 'required',
+        ]);
     }
 }
