@@ -25,8 +25,8 @@ class ProductController extends Controller
      */
     public function create()
     {
-        $products = Product::paginate(10);
-        return view('products.create', ['products' => $products]);
+        $product = new Product;
+        return view('products.create', ['product' => $product]);
     }
 
     /**
@@ -70,7 +70,8 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
-        //
+        $product = Product::find($id);
+        return view('products.edit', ['product' => $product]);
     }
 
     /**
@@ -82,7 +83,17 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $validatedData = $request->validate([
+            'name' => 'required',
+            'price' => 'required|decimal:2',
+            'description' => 'required',
+            'item_number' => 'required|integer',
+            'image' => 'required',
+        ]);
+
+        Product::find($id)->update($validatedData);
+
+        return redirect()->route('products.index')->with('success', 'Product was updated successfully');
     }
 
     /**

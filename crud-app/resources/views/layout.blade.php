@@ -11,7 +11,8 @@
 </head>
 
 <body>
-        <h1>CRUD App</h1>
+        <h1 class="text-center">CRUD App</h1>
+        <hr>
         @if(session()->get('success'))
             <div class="alert alert-success">
                 <span>{{session()->get('success')}}</span>

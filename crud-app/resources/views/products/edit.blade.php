@@ -2,11 +2,11 @@
 
 @section('content')
 
-<h1 class="text-center">Add a product</h1>
+<h1 class="text-center">Edit a product</h1>
 
 
 
-<form method="POST" action="{{route('products.store')}}" class="row g-3 justify-content-center text-center">
+<form method="POST" action="{{route('products.update', $product->id)}}" class="row g-3 justify-content-center text-center">
     <div class="col-2">
     
    
@@ -19,6 +19,7 @@
     @endif
 
 @csrf
+@method('PUT')
 @include('products.form')
 
   <div class="col-12">
