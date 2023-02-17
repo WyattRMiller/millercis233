@@ -1,3 +1,11 @@
+@if ($errors->any())
+    <div class="alert alert-danger">
+        @foreach ($errors->all() as $error)
+            <span>{{$error}}</span><hr>
+        @endforeach
+    </div>
+@endif
+
 <div class="col-12">
     <label for="name" class="form-label">Product Name</label>
     <input type="text" class="form-control" id="name" name="name" value="{{old('name', $product->name)}}">

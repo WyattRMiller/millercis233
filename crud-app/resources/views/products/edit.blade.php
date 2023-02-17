@@ -4,19 +4,8 @@
 
 <h1 class="text-center">Edit a product</h1>
 
-
-
 <form method="POST" action="{{route('products.update', $product->id)}}" class="row g-3 justify-content-center text-center">
     <div class="col-2">
-    
-   
-    @if ($errors->any())
-    <div class="alert alert-danger">
-        @foreach ($errors->all() as $error)
-            <span>{{$error}}</span><hr>
-        @endforeach
-    </div>
-    @endif
 
 @csrf
 @method('PUT')
