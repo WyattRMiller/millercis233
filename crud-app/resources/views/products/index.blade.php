@@ -24,7 +24,13 @@
     <td>${{$product->price}}</td>
     <td>{{$product->item_number}}</td>
     <td><button type="button" class="btn btn-primary">Edit</button></td>
-    <td><button type="button" class="btn btn-danger">Delete</button></td>
+    <td>
+      <form action="{{route('products.destroy', $product->id)}}" method="POST" onSubmit="return confirm('Are you sure you want to delete the product named {{$product->name}}?')">
+      @csrf
+      @method('DELETE')
+      <button type="submit" class="btn btn-danger">Delete</button>
+      </form>
+    </td>
   </tr>
   @endforeach
 </tbody>

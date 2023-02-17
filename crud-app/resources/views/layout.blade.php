@@ -11,6 +11,12 @@
 </head>
 
 <body>
+        <h1>CRUD App</h1>
+        @if(session()->get('success'))
+            <div class="alert alert-success">
+                <span>{{session()->get('success')}}</span>
+            </div>
+        @endif
         @yield('content')
 </body>
 
