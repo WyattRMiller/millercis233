@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use \App\Models\Product;
 
 class ProductSeeder extends Seeder
 {
@@ -12,15 +13,16 @@ class ProductSeeder extends Seeder
      *
      * @return void
      */
+
     public function run()
     {
-        \App\Models\Product::query()->delete();
+        Product::query()->delete();
 
         $faker = \Faker\Factory::create();
 
 
         foreach(range(1,30) as $number) {
-            \App\Models\Product::create([
+            Product::create([
                 'name' => 'Product',
                 'price' => $faker->randomFloat($nbMaxDecimals = 2, $min = 0, $max = 1000000.00),
                 'description' => 'This is the description of a product',
