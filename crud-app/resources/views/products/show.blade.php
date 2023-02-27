@@ -52,6 +52,10 @@
     </div>
 </form>
 
+@if (count($product->reviews) < 1)
+    <h1 class="text-center mt-5">This product has no reviews.</h1>
+@else
+
 <div class="row justify-content-center">
 <div class="card" style="width: 50rem;">
 @foreach ($product->reviews as $review)
@@ -68,5 +72,7 @@
 @endforeach
 </div>
 </div>
+
+@endif
 
 @endsection
