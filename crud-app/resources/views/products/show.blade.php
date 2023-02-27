@@ -56,20 +56,38 @@
     <h1 class="text-center mt-5">This product has no reviews.</h1>
 @else
 
-<div class="row justify-content-center">
-<div class="card" style="width: 50rem;">
+<div class="row g-3 justify-content-center text-center">
+<div class="col-4">
+<table class="table table-striped table-hover table-bordered text-center col-12">
+
+<thead>
+  <tr>
+    <th>Comment</th>
+    <th>Rating</th>
+    <th>Delete</th>
+  </tr>
+</thead>
+<tbody>
 @foreach ($product->reviews as $review)
     <tr>
         <td>{{$review->comment}}</td>
-        <td>{{$review->rating}}</td>
+        <td>
+            @for($i = 0; $i < $review->rating; $i++)
+            ★
+            @endfor
+            
+        </td>
+        <td>
+            <form action="{{route('reviews.destroy', $review->id)}}" method="POST" onSubmit="return confirm('Are you sure you want to delete this review?')">
+            @csrf
+            @method('DELETE')
+            <button type="submit" class="btn btn-danger">Delete</button>
+            </form>
+        </td>
     </tr>
-
-    <form action="{{route('reviews.destroy', $review->id)}}" method="POST" onSubmit="return confirm('Are you sure you want to delete this review?')">
-      @csrf
-      @method('DELETE')
-      <button type="submit" class="btn btn-danger">Delete</button>
-      </form>
 @endforeach
+</tbody>
+</table>
 </div>
 </div>
 
