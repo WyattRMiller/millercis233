@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use \App\Models\Review;
 
 class ReviewController extends Controller
 {
@@ -34,7 +35,9 @@ class ReviewController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Review::create($this->validatedData($request));
+
+        return redirect()->route('products.index')->with('success', 'Product was added successfully');
     }
 
     /**
@@ -80,5 +83,13 @@ class ReviewController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    private function validatedData($request) {
+        return $request->validate([
+            'comment' => 'required',
+            'rating' => 'required',
+            'product_id' => 'required'
+        ]);
     }
 }

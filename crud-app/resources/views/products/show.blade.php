@@ -17,7 +17,7 @@
 
 <h1 class="text-center mt-5">Add a review</h1>
 
-<form method="POST" action="{{route('products.store')}}" class="row g-3 justify-content-center text-center">
+<form method="POST" action="{{route('reviews.store')}}" class="row g-3 justify-content-center text-center">
     <div class="col-4">
 
 @csrf
@@ -38,7 +38,7 @@
 
   <div class="col-12">
     <button type="submit" class="btn btn-primary">Create</button>
-    <a href="{{route('products.index')}}" class="btn btn-danger">Clear</a> 
+    <input type="reset" class="btn btn-danger" value="Clear">
   </div>
 
     </div>
