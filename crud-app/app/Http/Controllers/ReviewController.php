@@ -37,7 +37,7 @@ class ReviewController extends Controller
     {
         Review::create($this->validatedData($request));
 
-        return redirect()->route('products.index')->with('success', 'Product was added successfully');
+        return redirect()->route('products.show', $request->product_id)->with('success', 'Review was added successfully');
     }
 
     /**
@@ -82,7 +82,10 @@ class ReviewController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $review = Review::find($id);
+        $review->delete();
+
+        return redirect()->route('products.show', $review->product_id)->with('success', 'Review was deleted successfully');
     }
 
     private function validatedData($request) {
