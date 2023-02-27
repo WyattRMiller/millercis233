@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use \App\Models\Product;
+use \App\Models\Review;
 
-class ProductController extends Controller
+class ReviewController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,8 +14,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Product::with('reviews')->paginate(10);
-        return view('products.index', ['products' => $products]);
+        //
     }
 
     /**
@@ -25,8 +24,7 @@ class ProductController extends Controller
      */
     public function create()
     {
-        $product = new Product;
-        return view('products.create', ['product' => $product]);
+        //
     }
 
     /**
@@ -37,9 +35,9 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        Product::create($this->validatedData($request));
+        Review::create($this->validatedData($request));
 
-        return redirect()->route('products.index')->with('success', 'Product was added successfully');
+        return redirect()->route('products.show', $request->product_id)->with('success', 'Review was added successfully');
     }
 
     /**
@@ -50,8 +48,7 @@ class ProductController extends Controller
      */
     public function show($id)
     {
-        $product = Product::with('reviews')->findOrFail($id);
-        return view('products.show', ['product' => $product]);
+        //
     }
 
     /**
@@ -62,8 +59,7 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
-        $product = Product::findOrFail($id);
-        return view('products.edit', ['product' => $product]);
+        //
     }
 
     /**
@@ -75,9 +71,7 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
-        Product::find($id)->update($this->validatedData($request));
-
-        return redirect()->route('products.index')->with('success', 'Product was updated successfully');
+        //
     }
 
     /**
@@ -88,19 +82,17 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-        $product = Product::find($id);
-        $product->delete();
+        $review = Review::find($id);
+        $review->delete();
 
-        return redirect()->route('products.index')->with('success', 'Product was deleted successfully');
+        return redirect()->route('products.show', $review->product_id)->with('success', 'Review was deleted successfully');
     }
 
     private function validatedData($request) {
         return $request->validate([
-            'name' => 'required',
-            'price' => 'required|decimal:2',
-            'description' => 'required',
-            'item_number' => 'required|integer',
-            'image' => 'required',
+            'comment' => 'required',
+            'rating' => 'required',
+            'product_id' => 'required'
         ]);
     }
 }
