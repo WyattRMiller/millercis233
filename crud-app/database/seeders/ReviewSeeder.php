@@ -22,7 +22,7 @@ class ReviewSeeder extends Seeder
         $productIdEnd = Product::orderBy('id')->limit(1)->pluck('id')->all();
         $productIdStart = Product::orderByDesc('id')->limit(1)->pluck('id')->all();
 
-        foreach(range(1,150) as $number) {
+        foreach(range(1,50) as $number) {
             Review::create([
                 'comment' => $faker->sentence($nbWords = 20, $variableNbWords = true),
                 'rating' => $faker->numberBetween(

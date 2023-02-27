@@ -15,4 +15,33 @@
 </div>
 </div>
 
+<h1 class="text-center mt-5">Add a review</h1>
+
+<form method="POST" action="{{route('products.store')}}" class="row g-3 justify-content-center text-center">
+    <div class="col-4">
+
+@csrf
+
+<div class="col-12">
+    <input type="hidden" id="product_id" name="product_id" value="{{$product->id}}">
+
+    <textarea type="text" class="form-control" id="comment" name="comment" placeholder="Write your comment here!" rows="3"></textarea>
+
+    <select class="form-control" id="rating" name="rating" >
+        <option value="1">1/5 Stars</option>
+        <option value="2">2/5 Stars</option>
+        <option value="3">3/5 Stars</option>
+        <option value="4">4/5 Stars</option>
+        <option value="5">5/5 Stars</option>
+    </select>
+  </div>
+
+  <div class="col-12">
+    <button type="submit" class="btn btn-primary">Create</button>
+    <a href="{{route('products.index')}}" class="btn btn-danger">Clear</a> 
+  </div>
+
+    </div>
+</form>
+
 @endsection
