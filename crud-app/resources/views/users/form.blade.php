@@ -15,3 +15,5 @@
     <label for="price" class="form-label">User Email</label>
     <input type="text" class="form-control" id="email" name="email" value="{{old('email', $user->email)}}">
   </div>
+
+  <input type="hidden" id="password" name="password" value="password">

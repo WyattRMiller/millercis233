@@ -97,7 +97,8 @@ class UserController extends Controller
     private function validatedData($request) {
         return $request->validate([
             'name' => 'required',
-            'email' => 'required'
+            'email' => 'required',
+            'password' => 'required'
         ]);
     }
 }
