@@ -64,7 +64,9 @@
   <tr>
     <th>Comment</th>
     <th>Rating</th>
-    <th>Delete</th>
+    @can('viewAny', App\Models\User::class)
+        <th>Delete</th>
+    @endcan
   </tr>
 </thead>
 <tbody>
@@ -77,13 +79,15 @@
             @endfor
             
         </td>
-        <td>
-            <form action="{{route('reviews.destroy', $review->id)}}" method="POST" onSubmit="return confirm('Are you sure you want to delete this review?')">
-            @csrf
-            @method('DELETE')
-            <button type="submit" class="btn btn-danger">Delete</button>
-            </form>
-        </td>
+        @can('viewAny', App\Models\User::class)
+            <td>
+                <form action="{{route('reviews.destroy', $review->id)}}" method="POST" onSubmit="return confirm('Are you sure you want to delete this review?')">
+                @csrf
+                @method('DELETE')
+                <button type="submit" class="btn btn-danger">Delete</button>
+                </form>
+            </td>
+        @endcan
     </tr>
 @endforeach
 </tbody>

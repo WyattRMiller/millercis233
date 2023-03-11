@@ -23,8 +23,11 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
+        if ($request->user()->cannot('viewAny', User::class)) {
+            return redirect()->route('dashboard')->with('error', 'You do not have permission.');
+        };
         $product = new Product;
         return view('products.create', ['product' => $product]);
     }
@@ -60,8 +63,11 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Request $request, $id)
     {
+        if ($request->user()->cannot('viewAny', User::class)) {
+            return redirect()->route('dashboard')->with('error', 'You do not have permission.');
+        };
         $product = Product::findOrFail($id);
         return view('products.edit', ['product' => $product]);
     }

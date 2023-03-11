@@ -12,8 +12,11 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        if ($request->user()->cannot('viewAny', User::class)) {
+            return redirect()->route('dashboard')->with('error', 'You do not have permission.');
+        };
         $users = User::with('reviews')->paginate(10);
         return view('users.index', ['users' => $users]);   
     }
@@ -23,8 +26,11 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
+        if ($request->user()->cannot('viewAny', User::class)) {
+            return redirect()->route('dashboard')->with('error', 'You do not have permission.');
+        };
         $user = new User;
         return view('users.create', ['user' => $user]);
     }
@@ -48,8 +54,11 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request, $id)
     {
+        if ($request->user()->cannot('viewAny', User::class)) {
+            return redirect()->route('dashboard')->with('error', 'You do not have permission.');
+        };
         $user = User::with('reviews')->findOrFail($id);
         return view('users.show', ['user' => $user]);
     }
@@ -60,8 +69,11 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Request $request, $id)
     {
+        if ($request->user()->cannot('viewAny', User::class)) {
+            return redirect()->route('dashboard')->with('error', 'You do not have permission.');
+        };
         $user = User::findOrFail($id);
         return view('users.edit', ['user' => $user]);
     }

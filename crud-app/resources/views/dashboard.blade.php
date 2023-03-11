@@ -1,8 +1,15 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Dashboard') }}
-        </h2>
+        <h1 class="text-center">CRUD App</h1>
+        @if(session()->get('success'))
+            <div class="alert alert-success">
+                <span>{{session()->get('success')}}</span>
+            </div>
+        @elseif(session()->get('error'))
+        <div class="alert alert-danger">
+            <span>{{session()->get('error')}}</span>
+        </div>
+        @endif
     </x-slot>
 
     <div class="py-12">
