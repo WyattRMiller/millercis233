@@ -35,8 +35,8 @@ class ReviewSeeder extends Seeder
                 $min = $productIdStart[0], 
                 $max = $productIdEnd[0]),
                 'user_id' => $faker->numberBetween(
-                    $min = $productIdStart[0], 
-                    $max = $productIdEnd[0]),
+                    $min = $userIdStart[0], 
+                    $max = $userIdEnd[0]),
             ]);
         }
     }
