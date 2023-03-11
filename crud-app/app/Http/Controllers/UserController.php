@@ -36,7 +36,9 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        User::create($this->validatedData($request));
+
+        return redirect()->route('users.index')->with('success', 'User was added successfully');
     }
 
     /**
@@ -47,7 +49,8 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        //
+        $user = User::with('reviews')->findOrFail($id);
+        return view('users.show', ['user' => $user]);
     }
 
     /**
