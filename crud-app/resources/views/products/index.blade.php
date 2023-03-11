@@ -2,7 +2,9 @@
 
 @section('content')
 
-<a type="button" class="btn btn-primary" href="{{route('products.create')}}">Add Product</a>
+@can('create', App\Models\User::class)
+  <a type="button" class="btn btn-primary" href="{{route('products.create')}}">Add Product</a>
+@endcan
 
 <table class="table table-striped table-hover table-bordered text-center">
 
