@@ -25,7 +25,8 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        $user = new User;
+        return view('users.create', ['user' => $user]);
     }
 
     /**
@@ -61,7 +62,8 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //
+        $user = User::findOrFail($id);
+        return view('users.edit', ['user' => $user]);
     }
 
     /**
@@ -73,7 +75,9 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        User::find($id)->update($this->validatedData($request));
+
+        return redirect()->route('users.index')->with('success', 'User was updated successfully');
     }
 
     /**
@@ -84,6 +88,16 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $user = User::find($id);
+        $user->delete();
+
+        return redirect()->route('users.index')->with('success', 'User was deleted successfully');
+    }
+
+    private function validatedData($request) {
+        return $request->validate([
+            'name' => 'required',
+            'email' => 'required'
+        ]);
     }
 }
