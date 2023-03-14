@@ -92,7 +92,8 @@ class ReviewController extends Controller
         return $request->validate([
             'comment' => 'required',
             'rating' => 'required',
-            'product_id' => 'required'
+            'product_id' => 'required',
+            'user_id' => 'required'
         ]);
     }
 }

@@ -1,8 +1,10 @@
-@extends('layout')
+@extends('dashboard')
 
 @section('content')
 
-<a type="button" class="btn btn-primary" href="{{route('products.create')}}">Add Product</a>
+@can('create', App\Models\User::class)
+  <a type="button" class="btn btn-primary" href="{{route('products.create')}}">Add Product</a>
+@endcan
 
 <table class="table table-striped table-hover table-bordered text-center">
 
@@ -12,8 +14,10 @@
     <th>Name</th>
     <th>Price</th>
     <th>Item Number</th>
-    <th>Edit</th>
-    <th>Delete</th>
+    @can('viewAny', App\Models\User::class)
+      <th>Edit</th>
+      <th>Delete</th>
+    @endcan
   </tr>
 </thead>
 <tbody>
@@ -27,15 +31,17 @@
 
     <td>{{$product->item_number}}</td>
 
-    <td><a type="button" class="btn btn-primary" href="{{route('products.edit', $product->id)}}">Edit</a></td>
+    @can('viewAny', App\Models\User::class)
+      <td><a type="button" class="btn btn-primary" href="{{route('products.edit', $product->id)}}">Edit</a></td>
 
-    <td>
-      <form action="{{route('products.destroy', $product->id)}}" method="POST" onSubmit="return confirm('Are you sure you want to delete the product named {{$product->name}}?')">
-      @csrf
-      @method('DELETE')
-      <button type="submit" class="btn btn-danger">Delete</button>
-      </form>
-    </td>
+      <td>
+        <form action="{{route('products.destroy', $product->id)}}" method="POST" onSubmit="return confirm('Are you sure you want to delete the product named {{$product->name}}?')">
+        @csrf
+        @method('DELETE')
+        <button type="submit" class="btn btn-danger">Delete</button>
+        </form>
+      </td>
+    @endcan
 
   </tr>
   @endforeach

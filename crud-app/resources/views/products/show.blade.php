@@ -1,4 +1,4 @@
-@extends('layout')
+@extends('dashboard')
 
 @section('content')             
 
@@ -33,6 +33,8 @@
     <div class="col-12">
         <input type="hidden" id="product_id" name="product_id" value="{{$product->id}}">
 
+        <input type="hidden" id="user_id" name="user_id" value="{{ Auth::user()->id }}">
+
         <textarea type="text" class="form-control" id="comment" name="comment" placeholder="Write your comment here!" rows="3"></textarea>
 
         <select class="form-control" id="rating" name="rating" >
@@ -56,15 +58,18 @@
     <h1 class="text-center mt-5">This product has no reviews.</h1>
 @else
 
-<div class="row g-3 justify-content-center text-center">
-<div class="col-4">
+<div class="row g-3 justify-content-center text-center mt-5">
+<div class="col-8">
 <table class="table table-striped table-hover table-bordered text-center col-12">
 
 <thead>
   <tr>
     <th>Comment</th>
     <th>Rating</th>
-    <th>Delete</th>
+    <th>Added by</th>
+    @can('viewAny', App\Models\User::class)
+        <th>Delete</th>
+    @endcan
   </tr>
 </thead>
 <tbody>
@@ -78,12 +83,17 @@
             
         </td>
         <td>
-            <form action="{{route('reviews.destroy', $review->id)}}" method="POST" onSubmit="return confirm('Are you sure you want to delete this review?')">
-            @csrf
-            @method('DELETE')
-            <button type="submit" class="btn btn-danger">Delete</button>
-            </form>
+            {{ $review->user->name}}
         </td>
+        @can('viewAny', App\Models\User::class)
+            <td>
+                <form action="{{route('reviews.destroy', $review->id)}}" method="POST" onSubmit="return confirm('Are you sure you want to delete this review?')">
+                @csrf
+                @method('DELETE')
+                <button type="submit" class="btn btn-danger">Delete</button>
+                </form>
+            </td>
+        @endcan
     </tr>
 @endforeach
 </tbody>
