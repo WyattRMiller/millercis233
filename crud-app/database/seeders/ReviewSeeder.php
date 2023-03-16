@@ -25,7 +25,7 @@ class ReviewSeeder extends Seeder
         $userIdEnd = User::orderBy('id')->limit(1)->pluck('id')->all();
         $userIdStart = User::orderByDesc('id')->limit(1)->pluck('id')->all();
 
-        foreach(range(1,50) as $number) {
+        foreach(range(1,150) as $number) {
             Review::create([
                 'comment' => $faker->sentence($nbWords = 20, $variableNbWords = true),
                 'rating' => $faker->numberBetween(
