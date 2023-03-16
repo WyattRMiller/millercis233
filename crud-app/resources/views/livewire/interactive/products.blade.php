@@ -23,7 +23,7 @@
 
                                     <td>{{ $product->item_number }}</td>
 
-                                    <td></td>
+                                    <td>{{ $product->rating }}</td>
 
                                 </tr>
                             @endforeach
