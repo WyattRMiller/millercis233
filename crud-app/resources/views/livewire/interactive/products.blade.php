@@ -23,12 +23,17 @@
 
                                     <td>{{ $product->item_number }}</td>
 
-                                    <td>{{ $product->rating }}</td>
+                                    <td>
+                                        @for ($i = 0; $i < $product->rating; $i++)
+                                            ★
+                                        @endfor
+                                    </td>
 
                                 </tr>
                             @endforeach
                         </tbody>
                     </table>
+                    {{ $products->links() }}
                 </div>
             </div>
         </div>
