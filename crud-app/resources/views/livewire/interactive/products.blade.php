@@ -4,7 +4,8 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
 
-                    <table class="table table-striped table-hover table-bordered text-center">
+                    {{ $products->links() }}
+                    <table class="table table-striped table-hover table-bordered text-center mb-2 mt-2">
 
                         <thead>
                             <tr>
