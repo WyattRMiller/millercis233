@@ -7,8 +7,12 @@ use App\Models\Product;
 
 class Products extends Component
 {
+    public $search = '';
+    protected $queryString = ['search' => ['except' => '']];
+
     public function render()
     {
-        return view('livewire.interactive.products', ['products' => Product::paginate(10)]);
+        $products = Product::where('name', 'like', "%$this->search%")->orWhere('item_number', 'like', "%$this->search%")->paginate(10);
+        return view('livewire.interactive.products', ['products' => $products]);
     }
 }
