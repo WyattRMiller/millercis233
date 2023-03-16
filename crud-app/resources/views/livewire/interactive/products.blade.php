@@ -5,6 +5,12 @@
                 <div class="p-6 text-gray-900">
 
                     <input wire:model="search" type="text" placeholder="Search Products" size="50" />
+                    <select wire:model="productsPerPage">
+                        <option value="10">10</option>
+                        <option value="25">25</option>
+                        <option value="50">50</option>
+                        <option value="{{PHP_INT_MAX}}">All</option>
+                    </select>
                     {{ $products->links() }}
                     <table class="table table-striped table-hover table-bordered text-center mb-2 mt-2">
 
