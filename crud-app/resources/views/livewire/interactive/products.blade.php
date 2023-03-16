@@ -10,8 +10,16 @@
 
                         <thead>
                             <tr>
-                                <th>Name</th>
-                                <th>Price</th>
+                                <th>
+                                    <a href="#" wire:click="doSort('name', 'asc')">&uarr;</a>
+                                    Name
+                                    <a href="#" wire:click="doSort('name', 'desc')">&darr;</a>
+                                </th>
+                                <th>
+                                    <a href="#" wire:click="doSort('price', 'asc')">&uarr;</a>
+                                    Price
+                                    <a href="#" wire:click="doSort('price', 'desc')">&darr;</a>
+                                </th>
                                 <th>Item Number</th>
                                 <th>Rating</th>
                             </tr>
