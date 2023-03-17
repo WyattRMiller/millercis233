@@ -9,7 +9,14 @@
                         <option value="10">10</option>
                         <option value="25">25</option>
                         <option value="50">50</option>
-                        <option value="{{PHP_INT_MAX}}">All</option>
+                        <option value="{{ PHP_INT_MAX }}">All</option>
+                    </select>
+                    <select wire:model="ratingSelect">
+                        <option value="1">★</option>
+                        <option value="2">★★</option>
+                        <option value="3">★★★</option>
+                        <option value="4">★★★★</option>
+                        <option value="5">★★★★★</option>
                     </select>
                     {{ $products->links() }}
                     <table class="table table-striped table-hover table-bordered text-center mb-2 mt-2">
@@ -27,7 +34,9 @@
                                     <a href="#" wire:click="doSort('price', 'desc')">&darr;</a>
                                 </th>
                                 <th>Item Number</th>
-                                <th>Rating</th>
+                                <th>
+                                    Rating
+                                </th>
                             </tr>
                         </thead>
                         <tbody>

@@ -13,9 +13,14 @@ class Products extends Component
     protected $queryString = [
         'search' => ['except' => ''],
         'sortBy' => ['except' => ''],
-        'direction' => ['except' => '']];
+        'direction' => ['except' => ''],
+        'productsPerPage',
+        
+    ];
 
     public $productsPerPage = 10;
+
+    public $ratingSelect = 1;
 
     public function doSort($field, $direction)
     {
@@ -25,7 +30,13 @@ class Products extends Component
 
     public function render()
     {
-        $products = Product::where('name', 'like', "%$this->search%")->orWhere('item_number', 'like', "%$this->search%")->orderBy($this->sortBy, $this->direction)->paginate($this->productsPerPage);
+        $products = Product::where(function ($query) {
+            $query->where('name', 'like', "%$this->search%")
+            ->orWhere('item_number', 'like', "%$this->search%")
+            ; })
+            ->where('rating', '=', $this->ratingSelect)
+            ->orderBy($this->sortBy, $this->direction)
+            ->paginate($this->productsPerPage);
         return view('livewire.interactive.products', ['products' => $products]);
     }
 }
