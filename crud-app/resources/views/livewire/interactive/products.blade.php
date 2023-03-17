@@ -24,14 +24,14 @@
                         <thead>
                             <tr>
                                 <th>
-                                    <a href="#" wire:click="doSort('name', 'asc')">&uarr;</a>
+                                    <button href="#" wire:click="doSort('name', 'asc')">&uarr;</button>
                                     Name
-                                    <a href="#" wire:click="doSort('name', 'desc')">&darr;</a>
+                                    <button href="#" wire:click="doSort('name', 'desc')">&darr;</button>
                                 </th>
                                 <th>
-                                    <a href="#" wire:click="doSort('price', 'asc')">&uarr;</a>
+                                    <button href="#" wire:click="doSort('price', 'asc')">&uarr;</button>
                                     Price
-                                    <a href="#" wire:click="doSort('price', 'desc')">&darr;</a>
+                                    <button href="#" wire:click="doSort('price', 'desc')">&darr;</button>
                                 </th>
                                 <th>Item Number</th>
                                 <th>

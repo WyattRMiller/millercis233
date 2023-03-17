@@ -4,9 +4,17 @@ namespace App\Http\Livewire\Interactive;
 
 use Livewire\Component;
 use App\Models\Product;
+use Livewire\WithPagination;
 
 class Products extends Component
 {
+    use WithPagination;
+
+    public function updatingSearch()
+    {
+        $this->resetPage();
+    }
+    
     public $sortBy = 'name';
     public $direction = 'asc';
     public $search = '';
@@ -14,8 +22,8 @@ class Products extends Component
         'search' => ['except' => ''],
         'sortBy' => ['except' => ''],
         'direction' => ['except' => ''],
-        'productsPerPage',
-        
+        'productsPerPage' => ['except' => ''],
+        'ratingSelect' => ['except' => '']
     ];
 
     public $productsPerPage = 10;
