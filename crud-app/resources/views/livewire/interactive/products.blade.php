@@ -49,9 +49,11 @@
                                     <td>{{ $product->item_number }}</td>
 
                                     <td>
-                                        @for ($i = 0; $i < $product->rating; $i++)
-                                            ★
+                                        <p>
+                                        @for ($count = 0; $count < $product->averageRating; $count++) 
+                                        ★
                                         @endfor
+                                        </p>
                                     </td>
 
                                 </tr>

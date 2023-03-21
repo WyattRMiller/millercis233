@@ -3,8 +3,8 @@
 namespace App\Http\Livewire\Interactive;
 
 use Livewire\Component;
-use App\Models\Product;
 use Livewire\WithPagination;
+use Illuminate\Support\Facades\DB;
 
 class Products extends Component
 {
@@ -14,7 +14,7 @@ class Products extends Component
     {
         $this->resetPage();
     }
-    
+
     public $sortBy = 'name';
     public $direction = 'asc';
     public $search = '';
@@ -38,13 +38,19 @@ class Products extends Component
 
     public function render()
     {
-        $products = Product::where(function ($query) {
-            $query->where('name', 'like', "%$this->search%")
-            ->orWhere('item_number', 'like', "%$this->search%")
-            ; })
-            ->where('rating', '=', $this->ratingSelect)
+        $products = DB::table('products')
+            ->leftJoin('reviews', 'products.id', '=', 'reviews.product_id')
+            ->select('product_id','name', 'price', 'item_number', DB::raw('round(avg(rating)) as averageRating'))
+            ->groupBy('product_id', 'name', 'price', 'item_number')
+            ->having(DB::raw('round(avg(rating))'), '=', $this->ratingSelect)
+            ->where(function ($query) {
+                $query->where('name', 'like', "%$this->search%")
+                    ->orWhere('item_number', 'like', "%$this->search%")
+                ;
+            })
             ->orderBy($this->sortBy, $this->direction)
             ->paginate($this->productsPerPage);
+
         return view('livewire.interactive.products', ['products' => $products]);
     }
 }
