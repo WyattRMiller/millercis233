@@ -27,6 +27,8 @@ Route::resource('reviews', ReviewController::class);
 
 Route::resource('users', UserController::class)->middleware('auth');
 
+Route::any('/interactive/products', \App\Http\Livewire\Interactive\Products::class);
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
